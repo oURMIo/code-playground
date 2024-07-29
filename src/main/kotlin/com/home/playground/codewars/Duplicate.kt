@@ -1,6 +1,6 @@
 package com.home.playground.codewars
 
-class Duplicate {
+private class Duplicate {
     fun duplicateCount(input: String): Int {
         var count = 0
         val list = mutableListOf<String>()

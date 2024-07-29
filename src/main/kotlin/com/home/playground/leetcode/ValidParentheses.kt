@@ -1,6 +1,6 @@
 package com.home.playground.leetcode
 
-class ValidParentheses {
+private class ValidParentheses {
     fun isValid(s: String): Boolean {
         val stack = CharArray(s.length)
         var top = -1

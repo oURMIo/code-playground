@@ -1,6 +1,6 @@
 package com.home.playground.leetcode
 
-class MergeTwoSortedLists {
+private class MergeTwoSortedLists {
     fun mergeTwoLists(list1: MutableList<Int>, list2: MutableList<Int>): MutableList<Int> {
         val result = mutableListOf<Int>()
         val storage = mutableListOf<Int>()

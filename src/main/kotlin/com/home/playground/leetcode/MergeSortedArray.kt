@@ -3,7 +3,7 @@ package com.home.playground.leetcode
 /**
  * task - https://leetcode.com/problems/merge-sorted-array/description/
  * */
-class MergeSortedArray {
+private class MergeSortedArray {
     fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
         var m = m
         var n = n

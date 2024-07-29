@@ -1,6 +1,6 @@
 package com.home.playground.leetcode
 
-class RomanInteger {
+private class RomanInteger {
     fun romanToInt(s: String): Int {
         var number = 0
         val arrayS = s.toCharArray()

@@ -1,6 +1,6 @@
 package com.home.playground.codewars
 
-object StockList {
+private object StockList {
     fun stockSummary(lstOfArt: Array<String>, lstOfCat: Array<String>): String {
         val caterMap = mutableMapOf<String, Int>()
         var caterLast = ""

@@ -1,6 +1,6 @@
 package com.home.playground.leetcode
 
-class Palindrome {
+private class Palindrome {
     /**
      * 207 ms
      * 36.87 MB

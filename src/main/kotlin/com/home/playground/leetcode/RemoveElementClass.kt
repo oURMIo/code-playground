@@ -3,7 +3,7 @@ package com.home.playground.leetcode
 /**
  * task - https://leetcode.com/problems/remove-element/description
  */
-class RemoveElementClass {
+private class RemoveElementClass {
     fun removeElement(nums: IntArray, `val`: Int): Int {
         var k = 0
         for (i in nums.indices) {

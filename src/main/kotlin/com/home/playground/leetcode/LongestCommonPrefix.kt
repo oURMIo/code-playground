@@ -1,6 +1,6 @@
 package com.home.playground.leetcode
 
-class LongestCommonPrefix {
+private class LongestCommonPrefix {
     fun commonPrefix(strs: Array<String>): String {
         var prefix = strs[0]
 
