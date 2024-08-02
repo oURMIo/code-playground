@@ -44,7 +44,7 @@ fun main() {
     fiftiethTest()
 }
 
-fun firstTest() {
+private fun firstTest() {
     if (IsSubsequenceClass().isSubsequence(s = "abc", t = "ahbgdc")) {
         println("first passed")
     } else {
@@ -52,7 +52,7 @@ fun firstTest() {
     }
 }
 
-fun secondTest() {
+private fun secondTest() {
     if (IsSubsequenceClass().isSubsequence(s = "axc", t = "ahbgdc")) {
         println("first failed")
     } else {
@@ -60,7 +60,7 @@ fun secondTest() {
     }
 }
 
-fun thirdTest() {
+private fun thirdTest() {
     if (IsSubsequenceClass().isSubsequence(s = "acb", t = "ahbgdc")) {
         println("first failed")
     } else {
@@ -68,7 +68,7 @@ fun thirdTest() {
     }
 }
 
-fun fourthTest() {
+private fun fourthTest() {
     if (IsSubsequenceClass().isSubsequence(s = "bb", t = "ahbgdc")) {
         println("first failed")
     } else {
@@ -76,7 +76,7 @@ fun fourthTest() {
     }
 }
 
-fun fiftiethTest() {
+private fun fiftiethTest() {
     if (IsSubsequenceClass().isSubsequence(s = "ab", t = "baab")) {
         println("first passed")
     } else {
