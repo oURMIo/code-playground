@@ -3,7 +3,7 @@ package com.home.playground.leetcode
 /**
  * task - https://leetcode.com/problems/minimum-size-subarray-sum/description/
  */
-class MinimumSizeSubarraySum {
+private class MinimumSizeSubarraySum {
     fun minSubArrayLen(target: Int, nums: IntArray): Int {
         if (nums.sum() < target) return 0
 

@@ -1,5 +1,8 @@
 package com.home.playground.leetcode
 
+/**
+ * task - https://leetcode.com/problems/longest-substring-without-repeating-characters/description
+ */
 private class LongestSubstringWithoutRepeatingCharacters {
     fun lengthOfLongestSubstring(s: String): Int {
         val map = mutableMapOf<Char, Int>()

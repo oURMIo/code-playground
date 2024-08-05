@@ -42,7 +42,7 @@ fun main() {
     testValidPalindrome3()
 }
 
-fun testValidPalindrome() {
+private fun testValidPalindrome() {
     val validPalindrome = ValidPalindrome()
 
     if (validPalindrome.isPalindrome("A man, a plan, a canal: Panama")) {
@@ -64,7 +64,7 @@ fun testValidPalindrome() {
     }
 }
 
-fun testValidPalindrome2() {
+private fun testValidPalindrome2() {
     val validPalindrome = ValidPalindrome2()
 
     if (validPalindrome.isPalindrome("A man, a plan, a canal: Panama")) {
@@ -86,7 +86,7 @@ fun testValidPalindrome2() {
     }
 }
 
-fun testValidPalindrome3() {
+private fun testValidPalindrome3() {
     val validPalindrome = ValidPalindrome3()
 
     if (validPalindrome.isPalindrome("A man, a plan, a canal: Panama")) {
