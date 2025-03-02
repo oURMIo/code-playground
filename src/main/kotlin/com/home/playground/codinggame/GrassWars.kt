@@ -1,4 +1,4 @@
-package com.home.playground.codgame
+package com.home.playground.codinggame
 
 import java.util.Scanner
 

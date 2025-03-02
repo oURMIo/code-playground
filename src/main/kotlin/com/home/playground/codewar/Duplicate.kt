@@ -1,4 +1,4 @@
-package com.home.playground.codewars
+package com.home.playground.codewar
 
 private class Duplicate {
     fun duplicateCount(input: String): Int {

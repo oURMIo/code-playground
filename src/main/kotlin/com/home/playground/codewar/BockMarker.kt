@@ -1,4 +1,4 @@
-package com.home.playground.codewars
+package com.home.playground.codewar
 
 private object StockList {
     fun stockSummary(lstOfArt: Array<String>, lstOfCat: Array<String>): String {
