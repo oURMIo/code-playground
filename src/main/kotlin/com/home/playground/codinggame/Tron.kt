@@ -24,8 +24,8 @@ fun main() {
         var myY = 0
 
         repeat(n) { i ->
-            val x0 = input.nextInt()
-            val y0 = input.nextInt()
+            val X0 = input.nextInt() // starting X coordinate of lightcycle (or -1)
+            val Y0 = input.nextInt() // starting Y coordinate of lightcycle (or -1)
             val x1 = input.nextInt()
             val y1 = input.nextInt()
 
@@ -38,12 +38,18 @@ fun main() {
             }
         }
 
-        val possibleMoves = DIRECTIONS.filter { (_, delta) ->
-            val newX = myX + delta.first
-            val newY = myY + delta.second
-            newX in 0 until WIDTH && newY in 0 until HEIGHT && !ARENA[newX][newY]
-        }
+        val move = getPossibleMoves(myX, myY).firstOrNull()?.first ?: "UP"
 
-        println(possibleMoves.randomOrNull()?.first ?: "UP")
+        System.err.printf("Player num: %d (%d, %d)%n", p, myX, myY);
+        println(move)
     }
+}
+
+private fun getPossibleMoves(
+    myX: Int,
+    myY: Int
+) = DIRECTIONS.filter { (_, delta) ->
+    val newX = myX + delta.first
+    val newY = myY + delta.second
+    newX in 0 until WIDTH && newY in 0 until HEIGHT && !ARENA[newX][newY]
 }
