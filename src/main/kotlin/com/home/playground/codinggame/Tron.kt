@@ -2,103 +2,48 @@ package com.home.playground.codinggame
 
 import java.util.Scanner
 
-private enum class Move {
-    RIGHT, LEFT, UP, DOWN, NO
-}
+private const val WIDTH: Int = 30
+private const val HEIGHT: Int = 20
 
-private data class Player(
-    val number: Int,
-    var x: Int,
-    var y: Int,
-    var lastMove: Move,
-) {
-    fun setLocation(x: Int, y: Int) {
-        this.x = x
-        this.y = y
-    }
-}
+private val ARENA = Array(WIDTH) { BooleanArray(HEIGHT) }
+private val DIRECTIONS = listOf(
+    "UP" to Pair(0, -1),
+    "DOWN" to Pair(0, 1),
+    "LEFT" to Pair(-1, 0),
+    "RIGHT" to Pair(1, 0)
+)
 
 
-fun main(args: Array<String>) {
+fun main() {
     val input = Scanner(System.`in`)
 
     while (true) {
-        val playerNumber = input.nextInt()
-        val playerMeNumber = input.nextInt()
-        val mePlayer = Player(number = playerMeNumber, x = 0, y = 0, lastMove = Move.NO)
-        val enemyPlayer = Player(number = 1 - playerMeNumber, x = 0, y = 0, lastMove = Move.NO)
-        for (i in 0 until playerNumber) {
-            val startX = input.nextInt()
-            val startY = input.nextInt()
-            val nowX = input.nextInt()
-            val nowY = input.nextInt()
-            if (i == mePlayer.number) {
-                mePlayer.setLocation(nowX, nowY)
-            } else {
-                enemyPlayer.setLocation(nowX, nowY)
+        val n = input.nextInt()
+        val p = input.nextInt()
+        var myX = 0
+        var myY = 0
+
+        repeat(n) { i ->
+            val x0 = input.nextInt()
+            val y0 = input.nextInt()
+            val x1 = input.nextInt()
+            val y1 = input.nextInt()
+
+            if (x1 != -1 && y1 != -1) {
+                ARENA[x1][y1] = true
+                if (i == p) {
+                    myX = x1
+                    myY = y1
+                }
             }
-            arena[nowY][nowX] = false
         }
-        System.err.println("mePlayer:${mePlayer}")
-        System.err.println("enemyPlayer:${enemyPlayer}")
 
-        var move = determineDirection(mePlayer.x, mePlayer.y, enemyPlayer.x, enemyPlayer.y, mePlayer.lastMove)
-        if (move == Move.UP && mePlayer.lastMove == Move.DOWN ||
-            move == Move.DOWN && mePlayer.lastMove == Move.UP ||
-            move == Move.RIGHT && mePlayer.lastMove == Move.LEFT ||
-            move == Move.LEFT && mePlayer.lastMove == Move.RIGHT
-        ) {
-            System.err.println("!!! HAVE ERROR")
-            move = Move.LEFT
+        val possibleMoves = DIRECTIONS.filter { (_, delta) ->
+            val newX = myX + delta.first
+            val newY = myY + delta.second
+            newX in 0 until WIDTH && newY in 0 until HEIGHT && !ARENA[newX][newY]
         }
-        mePlayer.lastMove = move
-        println(move)
+
+        println(possibleMoves.randomOrNull()?.first ?: "UP")
     }
 }
-
-private fun determineDirection(meX: Int, meY: Int, enemyX: Int, enemyY: Int, lastMove: Move): Move {
-    val verticalDiff = meY.compareTo(enemyY)
-    val horizontalDiff = meX.compareTo(enemyX)
-    System.err.println("/// lastMove:${lastMove}, verticalDiff:${verticalDiff}, horizontalDiff:${horizontalDiff}")
-    return when (lastMove) {
-        Move.RIGHT -> when {
-            verticalDiff > 0 -> Move.UP
-            verticalDiff < 0 -> Move.DOWN
-            else -> Move.RIGHT
-        }
-
-        Move.LEFT -> when {
-            verticalDiff > 0 -> Move.UP
-            verticalDiff < 0 -> Move.DOWN
-            else -> Move.LEFT
-        }
-
-        Move.UP -> when {
-            horizontalDiff > 0 -> Move.LEFT
-            horizontalDiff < 0 -> Move.RIGHT
-            else -> Move.UP
-        }
-
-        Move.DOWN -> when {
-            horizontalDiff > 0 -> Move.LEFT
-            horizontalDiff < 0 -> Move.RIGHT
-            else -> Move.DOWN
-        }
-
-        Move.NO -> when {
-            verticalDiff > 0 -> Move.UP
-            verticalDiff < 0 -> Move.DOWN
-            horizontalDiff > 0 -> Move.LEFT
-            horizontalDiff < 0 -> Move.RIGHT
-            else -> Move.LEFT
-        }
-    }
-}
-
-private fun canMove(willX: Int, willY: Int): Boolean {
-    return arena[willY][willX]
-}
-
-private const val WIDTH_SIZE: Int = 30
-private const val HEIGHT_SIZE: Int = 20
-private val arena = Array(HEIGHT_SIZE) { Array(WIDTH_SIZE) { true } }
