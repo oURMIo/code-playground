@@ -1,5 +1,7 @@
 package com.home.playground.codinggame
 
+import java.util.LinkedList
+import java.util.Queue
 import java.util.Scanner
 
 private const val WIDTH: Int = 30
@@ -24,8 +26,8 @@ fun main() {
         var myY = 0
 
         repeat(n) { i ->
-            val X0 = input.nextInt() // starting X coordinate of lightcycle (or -1)
-            val Y0 = input.nextInt() // starting Y coordinate of lightcycle (or -1)
+            val x0 = input.nextInt() // starting X coordinate of lightcycle (or -1)
+            val y0 = input.nextInt() // starting Y coordinate of lightcycle (or -1)
             val x1 = input.nextInt()
             val y1 = input.nextInt()
 
@@ -38,18 +40,42 @@ fun main() {
             }
         }
 
-        val move = getPossibleMoves(myX, myY).firstOrNull()?.first ?: "UP"
-
-        System.err.printf("Player num: %d (%d, %d)%n", p, myX, myY);
+        val move = getBestMove(myX, myY) ?: "UP"
         println(move)
     }
 }
 
-private fun getPossibleMoves(
-    myX: Int,
-    myY: Int
-) = DIRECTIONS.filter { (_, delta) ->
-    val newX = myX + delta.first
-    val newY = myY + delta.second
-    newX in 0 until WIDTH && newY in 0 until HEIGHT && !ARENA[newX][newY]
+private fun getBestMove(myX: Int, myY: Int): String? {
+    return DIRECTIONS.mapNotNull { (dir, delta) ->
+        val newX = myX + delta.first
+        val newY = myY + delta.second
+        if (newX in 0 until WIDTH && newY in 0 until HEIGHT && !ARENA[newX][newY]) {
+            val reachableCells = bfs(newX, newY)
+            dir to reachableCells
+        } else null
+    }
+        .maxByOrNull { it.second }?.first
+}
+
+private fun bfs(startX: Int, startY: Int): Int {
+    val visited = Array(WIDTH) { BooleanArray(HEIGHT) }
+    val queue: Queue<Pair<Int, Int>> = LinkedList()
+    queue.add(startX to startY)
+    visited[startX][startY] = true
+    var count = 0
+
+    while (queue.isNotEmpty()) {
+        val (x, y) = queue.poll()
+        count++
+
+        for ((_, delta) in DIRECTIONS) {
+            val newX = x + delta.first
+            val newY = y + delta.second
+            if (newX in 0 until WIDTH && newY in 0 until HEIGHT && !ARENA[newX][newY] && !visited[newX][newY]) {
+                visited[newX][newY] = true
+                queue.add(newX to newY)
+            }
+        }
+    }
+    return count
 }
